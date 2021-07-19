@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 df = tf.keras.datasets.fashion_mnist
 (train_image, train_label),(test_image, test_label) = df.load_data()
 
-class_dress = ['Top','Pants','Pullover','Dress','Coat','Sandal','Shirt','Sneaker','Bag','Ankle boot']
+class_dress = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
+               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 plt.figure()
 plt.imshow(train_image[0])
@@ -54,7 +55,6 @@ accuracy = cross_val_score(estimator=model, X= train_image, y= train_label,cv = 
 mean = accuracy.mean()
  
 predicted_image = model.predict(test_image)
-
 #Sample Predictions
 
 print("Predicted class: " +  class_dress[np.argmax(predicted_image[6])])
@@ -64,5 +64,25 @@ Results = []
 
 for i in range(0,10000):
     Results.append("Predicted: " + class_dress[np.argmax(predicted_image[i])]+" -- "+ "Actual: " + class_dress[test_label[i]])
+
+
+#False Prediction
+plt.figure()
+plt.subplot(1,2,1)
+plt.imshow(test_image[12],cmap=plt.cm.binary)
+plt.xlabel(class_dress[test_label[12]])
+plt.subplot(1,2,2)
+plt.xlabel(class_dress[np.argmax(predicted_image[12])])
+plt.show()
+
+#Correct Prediction
+plt.figure()
+plt.subplot(1,2,1)
+plt.imshow(test_image[0],cmap=plt.cm.binary)
+plt.xlabel(class_dress[test_label[0]])
+plt.subplot(1,2,2)
+plt.xlabel(class_dress[np.argmax(predicted_image[0])])
+plt.show()
+
 
 
