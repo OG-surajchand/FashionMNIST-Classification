@@ -60,5 +60,9 @@ predicted_image = model.predict(test_image)
 print("Predicted class: " +  class_dress[np.argmax(predicted_image[6])])
 print("Actual Test class: " +  class_dress[test_label[6]])
 
+Results = []
+
+for i in range(0,10000):
+    Results.append("Predicted: " + class_dress[np.argmax(predicted_image[i])]+" -- "+ "Actual: " + class_dress[test_label[i]])
 
 
